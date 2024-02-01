@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Voici toutes les reviews de : <%= @restaurant.name %></h1>
+
+<div id="reviews">
+  <% @reviews.each do |review| %>
+    <%= render review %>
+     <%# <p> %>
+       <%# <%= link_to "Show this review", reviews_path %>
+     <%# </p> %>
+  <% end %>
+</div>
+
+<%# <%= link_to "New review", new_restaurant_review_path %>
+
+<%= link_to "Back to #{@restaurant.name}", restaurant_path(@restaurant)  %>
