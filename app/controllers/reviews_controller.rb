@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Restaurants ccontroller
 class ReviewsController < ApplicationController
   before_action :set_restaurant, only: %i[ index new create ]
 
@@ -18,8 +21,7 @@ class ReviewsController < ApplicationController
   end
 
   # GET /reviews/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /reviews
   def create
@@ -27,7 +29,7 @@ class ReviewsController < ApplicationController
     @review.restaurant = @restaurant
 
     if @review.save
-      redirect_to restaurant_path(@restaurant), notice: "Review was successfully created."
+      redirect_to restaurant_path(@restaurant), notice: 'Review was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,7 +38,7 @@ class ReviewsController < ApplicationController
   # PATCH/PUT /reviews/1
   def update
     if @review.update(review_params)
-      redirect_to @review, notice: "Review was successfully updated.", status: :see_other
+      redirect_to @review, notice: 'Review was successfully updated.', status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -46,18 +48,18 @@ class ReviewsController < ApplicationController
   def destroy
     @review = Review.find(params[:id])
     @review.destroy!
-    redirect_to restaurant_path(@review.restaurant), notice: "Review was successfully destroyed.", status: :see_other
+    redirect_to restaurant_path(@review.restaurant), notice: 'Review was successfully destroyed.', status: :see_other
   end
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_restaurant
-      @restaurant = Restaurant.find(params[:restaurant_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def review_params
-      params.require(:review).permit(:rating, :content, :restaurant_id)
-    end
+  # Only allow a list of trusted parameters through.
+  def review_params
+    params.require(:review).permit(:rating, :content, :restaurant_id)
+  end
 end
